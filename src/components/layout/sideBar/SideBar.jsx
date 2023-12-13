@@ -18,9 +18,9 @@ export default function SideBar() {
 
   return (
     <Flex
-      fontFamily="Alata"
+      fontWeight="bold"
       pos="sticky"
-      h="auto"
+      h="100vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
       borderRightRadius={navSize === "small" ? "0px" : "20px"}
       w={navSize === "small" ? "50px" : "200px"}
@@ -40,8 +40,7 @@ export default function SideBar() {
         textAlign="center"
         bgGradient="linear-gradient(98deg, #FFF 70.67%, rgba(117, 122, 140, 0.00) 108.55%)"
         bgClip="text"
-        // webkitBgClip="text"
-        // webkitTextFillColor="transparent"
+ 
       >
         DigiSynd
       </Text>
