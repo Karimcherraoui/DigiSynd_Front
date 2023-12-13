@@ -7,7 +7,7 @@ export default function ApartmentForm() {
 
     return (
         <>
-        <Flex flexDirection="column" justifyContent="center" ml="100px">
+        <Flex flexDirection="column" justifyContent="center"   w="100%" >
         <Heading as="h2" size="md" color="white" textAlign="center" mb="20px" mt="30px" >
             Add Apartment
         </Heading>
@@ -33,8 +33,8 @@ export default function ApartmentForm() {
             </Flex>
 
             <Flex flexDirection="column">
-            <FormLabel color="white">Number of Appartment</FormLabel>
-            <Input h="50px" placeholder="Number of Appartment" />
+            <FormLabel color="white">Number of Apartment</FormLabel>
+            <Input h="50px" placeholder="Number of Apartment" />
             </Flex>
             <Flex flexDirection="column" >
             <FormLabel color="white">Floor</FormLabel>
