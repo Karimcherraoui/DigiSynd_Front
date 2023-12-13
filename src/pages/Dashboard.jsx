@@ -1,29 +1,30 @@
 import { Flex, Text } from "@chakra-ui/react";
 import Background from "../assets/images/Background.png";
-import BoxStat from "./Tables/ListApprt/BoxStat";
+import BoxStat from "../components/ListApart/BoxStat";
 import { FaWallet } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import { GiTakeMyMoney } from "react-icons/gi";
-import ListAppart from "./Tables/ListApprt/ListAppart";
-import ApartmentForm from "../components/forms/ApartmentForm";
 import Footer from "../components/layout/Footer";
 import SideBar from "../components/layout/sideBar/SideBar";
-import TableAppart from "./Tables/TableAppart/TableApprt";
+import { Outlet } from "react-router-dom";
 
 export default function Dashboard() {
+
+  
+
   return (
     <Flex
       flexDirection="row"
       backgroundImage={Background}
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
-      // h="100vh"
+      w="100vw"
       minHeight="100vh"
     >
       <SideBar />
 
-      <Flex flexDirection="column" mt="25px">
-        <Flex gap="150px" justifyContent="center" ml="130px">
+      <Flex flexDirection="column" mt="25px" mx="auto" >
+        <Flex gap="150px" justifyContent="center" >
           <BoxStat
             title="Today's Money"
             number="2000 Dh"
@@ -41,39 +42,7 @@ export default function Dashboard() {
           />
         </Flex>
 
-        {/* <Flex
-          justifyContent="center"
-          alignItems="center"
-          mt="50px"
-          w="100%"
-          mx="50px"
-         
-        >
-          
-            <ListAppart />
-        </Flex> */}
-
-
-        <Flex
-          justifyContent="center"
-          alignItems="center"
-          mt="50px"
-          w="100%"
-          mx="50px"
-         
-        >
-          
-            <TableAppart />
-        </Flex>
-
-
-
-        {/* <ApartmentForm
-          justifyContent="center"
-          alignItems="center"
-          w="80%"
-
-        /> */}
+        <Outlet/>
 
         <Footer />
       </Flex>
