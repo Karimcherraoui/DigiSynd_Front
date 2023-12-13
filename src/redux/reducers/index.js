@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 import apartmentReducer from './apartmentReducer';
-import userReducer from './userReducer';
+import adminReducer from './adminReducer';
 
 
 
 
 const rootReducer = combineReducers({
-  apparts: apartmentReducer,
-  user : userReducer
+  aparts: apartmentReducer,
+  admin : adminReducer
 
 });
 
