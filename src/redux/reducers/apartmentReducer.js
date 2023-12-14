@@ -10,18 +10,18 @@ const apartmentReducer = (state = initialState, action) => {
     case actionTypes.GET_APARTMENTS:
       return { ...state, apartments: action.payload };
 
-    // case actionTypes.ADD_POST:
-    //   return { ...state, posts: [...state.posts, action.payload.post] };
+    case actionTypes.ADD_APARTMENT:
+      return { ...state, apartments: [...state.apartments, action.payload] };
 
-    // case actionTypes.UPDATE_POST:
-    //   return {
-    //     ...state,
-    //     posts: state.posts.map((post) =>
-    //       post._id === action.payload._id
-    //         ? { ...post, ...action.payload }
-    //         : post
-    //     ),
-    //   };
+    case actionTypes.UPDATE_POST:
+      return {
+        ...state,
+        posts: state.posts.map((post) =>
+          post._id === action.payload._id
+            ? { ...post, ...action.payload }
+            : post
+        ),
+      };
 
     // case actionTypes.SELECT_POST:
     //   return {
@@ -40,11 +40,12 @@ const apartmentReducer = (state = initialState, action) => {
     //     ...state,
     //     selectedPost: null,
     //   };
-    // case actionTypes.DELETE_POST:
-    //   return {
-    //     ...state,
-    //     posts: state.posts.filter((post) => post._id !== action.payload),
-    //   };
+    case actionTypes.DELETE_APARTMENT:
+      console.log("action.payload", action.payload);
+      return {
+        ...state,
+        apartments: state.apartments.filter((apartment) => apartment._id !== action.payload),
+      };
     case actionTypes.PAY_APARTMENT:
 
       return {
