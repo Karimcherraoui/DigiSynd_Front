@@ -1,16 +1,26 @@
 import { Flex, Text } from "@chakra-ui/react";
 import Background from "../assets/images/Background.png";
 import BoxStat from "../components/ListApart/BoxStat";
-import { FaWallet } from "react-icons/fa";
+
 import { FaUsers } from "react-icons/fa";
 import { GiTakeMyMoney } from "react-icons/gi";
 import Footer from "../components/layout/Footer";
 import SideBar from "../components/layout/sideBar/SideBar";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { MdApartment } from "react-icons/md";
+import { FaMoneyBillTransfer } from "react-icons/fa6";
 
 export default function Dashboard() {
 
-  
+  const aparts  = useSelector((state) => state.aparts.apartments);
+  const payedAparts = aparts.filter((apart) => apart.isPaid === true);
+
+
+
+const numberOfApartments = aparts.length;
+const numberOfPayedApartments = payedAparts.length;
+const numberOfNotPayedApartments = numberOfApartments - numberOfPayedApartments;
 
   return (
     <Flex
@@ -26,19 +36,19 @@ export default function Dashboard() {
       <Flex flexDirection="column" mt="25px" mx="auto" >
         <Flex gap="150px" justifyContent="center" >
           <BoxStat
-            title="Today's Money"
-            number="2000 Dh"
-            icon={<FaWallet color="white" size="20px" />}
+            title="Number of Apartments"
+            number={numberOfApartments}
+            icon={<MdApartment color="white" size="20px" />}
           />
           <BoxStat
-            title="Today’s Users"
-            number="2"
-            icon={<FaUsers color="white" size="20px" />}
-          />
-          <BoxStat
-            title="Total Sales"
-            number="10933 Dh"
+            title="Apartments payed"
+            number={numberOfPayedApartments}
             icon={<GiTakeMyMoney color="white" size="20px" />}
+            />
+          <BoxStat
+            title="Apartments not payed"
+            number={numberOfNotPayedApartments}
+            icon={<FaMoneyBillTransfer color="white" size="20px" />}
           />
         </Flex>
 
