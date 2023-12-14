@@ -3,28 +3,21 @@ import axios from './config';
 
 const ApiService = {
   
-//   createApartment: async (post) => {
-//     try {
-//       const userData = JSON.parse(localStorage.getItem("user"));
-//       const token = userData.token;
-//       const res = await axios.post('/post/', post ,{
-//         headers: {
-//           Authorization: `Bearer ${token}`
-//         }
-//       });
-//       return res.data;
-//     } catch (error) {
-//       console.error('Error creating post:', error);
-//       throw error;
-//     }
-//   },
+  createApartment: async (apart) => {
+    try {
+      const res = await axios.post('/apartment/', apart );
+      return res.data;
+    } catch (error) {
+      console.error('Error creating apartment try again:');
+      throw error;
+    }
+  },
   getApartments: async () => {
     try {
       const res = await axios.get('/apartment');
-      console.log(res.data);
       return res.data;
     } catch (error) {
-      console.error('Error getting posts:', error);
+      console.error('Error getting apartments:', error);
       throw error;
     }
   },
@@ -46,22 +39,17 @@ const ApiService = {
     
 //   },
   
-//   deletePost: async (postId) => {
-//     try {
-//       const userData = JSON.parse(localStorage.getItem("user"));
-//       const token = userData.token;
-//       const res = await axios.delete(`/post/${postId}` , {
-//         headers: {
-//           "Authorization": `Bearer ${token}`
-//         }
-//       });
-//       return res.data;
-//     } catch (error) {
-//       enqueueSnackbar("You can't delete the post", { variant: 'error' })
-//       console.error(`Error deleting post with id ${postId}:`, error);
-//       throw error;
-//     }
-//   },
+  deleteApartment: async (apartmentId) => {
+    try {
+    
+      const res = await axios.delete(`/apartment/${apartmentId}` );
+      return res.data;
+    } catch (error) {
+      // enqueueSnackbar("You can't delete the apartment", { variant: 'error' })
+      console.error(`Error deleting apartment with id ${apartmentId}:`, error);
+      throw error;
+    }
+  },
   
 
 
