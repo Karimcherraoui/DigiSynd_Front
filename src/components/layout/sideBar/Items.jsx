@@ -9,19 +9,19 @@ import { NavLink } from "react-router-dom";
 const icons = {
   Dashboard: {
     link:'/dashboard',
-    icon:FiHome
+    icon:FiHome,
+    name:"Dashboard"
   },
-  New_Apartment : {
+  NewApartment : {
     link:'/add-apartment',
-    icon:MdFormatListBulletedAdd
+    icon:MdFormatListBulletedAdd,
+    name:"New Apartment"
   },
-  SignIn:{
-    link:'/',
-    icon:CgProfile
-  },
-  SignUp: {
+
+  NewSyndic: {
     link:'/Register',
-    icon:FaUserPlus
+    icon:FaUserPlus,
+    name:"New Syndic"
   }
 };
 
@@ -36,7 +36,7 @@ export default function Items({ navSize }) {
               <Flex p={3} gap="10px" alignItems="center">
                 <Icon color="blue.300" as={value.icon} />
                 <Text color="gray.400" display={navSize === "small" ? "none" : "flex"}>
-                  {key}
+                  {value.name}
                 </Text>
               </Flex>
             </MenuButton>
