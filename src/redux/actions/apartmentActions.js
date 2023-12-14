@@ -22,29 +22,30 @@ export const getApartments = () => async (dispatch) => {
 //   }
   
 
-// export const addPost = (data) => async (dispatch) => {
+export const addApartment = (data) => async (dispatch) => {
 
-//   try {
-//     const newPost = await ApiService.createPost({...data });
-//     dispatch({ type: actionTypes.ADD_POST, payload: newPost });
-//     // enqueueSnackbar("Post has been added successfully.", { variant: 'success' })
+  try {
+    const newApartment = await ApiService.createApartment({...data });
+    dispatch({ type: actionTypes.ADD_APARTMENT, payload: newApartment });
+    // enqueueSnackbar("Post has been added successfully.", { variant: 'success' })
 
-//   } catch (error) {
-//     // enqueueSnackbar("Error adding post.", { variant: 'error' })
+  } catch (error) {
+    // enqueueSnackbar("Error adding post.", { variant: 'error' })
 
-//   }
-// };
+  }
+};
 
-// export const deletePost = (postId) => async (dispatch) => {
-//   try {
-//     await ApiService.deletePost(postId);
-//     dispatch({ type: actionTypes.DELETE_POST, payload: postId });
-//     // enqueueSnackbar("Post deleted successfully.", { variant: 'success' })
+export const deleteApart = (apartmentId) => async (dispatch) => {
+  try {
+    console.log("apartmentId from action ", apartmentId);
+    await ApiService.deleteApartment(apartmentId);
+    dispatch({ type: actionTypes.DELETE_APARTMENT, payload: apartmentId });
+    // enqueueSnackbar("Post deleted successfully.", { variant: 'success' })
 
-//   } catch (error) {
-//     // enqueueSnackbar("Error deleting post.", { variant: 'error' })
-//   }
-// };
+  } catch (error) {
+    // enqueueSnackbar("Error deleting post.", { variant: 'error' })
+  }
+};
 
 
 
