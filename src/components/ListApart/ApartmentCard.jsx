@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Button, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import img from "../../assets/images/apart.webp";
 import { LuPenSquare } from "react-icons/lu";
@@ -6,19 +6,15 @@ import { MdDeleteOutline } from "react-icons/md";
 import { GiReceiveMoney } from "react-icons/gi";
 import { FaRegFilePdf } from "react-icons/fa6";
 import DeleteConfirm from "../dialogs/DeleteConfirm";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { payApartment } from '../../redux/actions/apartmentActions';
 
 export default function ApartmentCard({apartment}) {
-
+  console.log(apartment);
   const dispatch = useDispatch();
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const isPaid = apartment.isPaid 
-
-    console.log(isPaid);
 
     const handlPayment = () => {
-      console.log('Payment button clicked');
       dispatch(payApartment(apartment._id))
     }
 
@@ -37,7 +33,7 @@ export default function ApartmentCard({apartment}) {
       boxShadow="rgba(0, 0, 0, 0.35) 20px 20px 30px"
       position="relative"
     >
-      <DeleteConfirm id={apartment.id} isOpen={isOpen} onClose={onClose} />
+      <DeleteConfirm id={apartment._id} isOpen={isOpen} onClose={onClose} />
       <Flex pos="absolute" gap="10px" right="10px" top="10px">
         <Button size="sm" colorScheme="blue" variant="solid">
           <LuPenSquare />
@@ -103,12 +99,12 @@ export default function ApartmentCard({apartment}) {
         onClick={handlPayment}
           leftIcon={<GiReceiveMoney />}
           w="70%"
-          colorScheme={isPaid ? "gray" : "green"}
+          colorScheme={apartment.isPaid ? "gray" : "green"}
           variant="solid"
-          isDisabled={isPaid}
+          isDisabled={apartment.isPaid}
 
         >
-          {isPaid ? "Payed" : "Pay"}
+          {apartment.isPaid ? "Payed" : "Pay"}
         </Button>
         <Button
           w="20%"
