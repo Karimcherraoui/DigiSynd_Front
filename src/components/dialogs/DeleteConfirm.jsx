@@ -1,8 +1,17 @@
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteApart } from '../../redux/actions/apartmentActions'
 
 export default function DeleteConfirm({ id, isOpen, onOpen, onClose }) {
+        const dispatch = useDispatch()
 
+
+        const deleteApartment = () => {
+          console.log("from delete component",id);
+          dispatch(deleteApart(id))
+          onClose()
+        }
 
     // dispatch({ type: 'DELETE_APARTMENT', payload: id })
 
@@ -23,7 +32,7 @@ export default function DeleteConfirm({ id, isOpen, onOpen, onClose }) {
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button background='red' color='white' variant='ghost'>Delete</Button>
+            <Button background='red' color='white' variant='ghost' onClick={deleteApartment}>Delete</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
