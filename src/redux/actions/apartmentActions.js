@@ -1,11 +1,11 @@
 import * as actionTypes from './actionsType'
 import ApiService from '../../services/api';
 import toast from '../../components/toast/toast';
+import { redirect } from 'react-router-dom';
 
 export const getApartments = () => async (dispatch) => {
     try {
       const apartments = await ApiService.getApartments();
-      console.log("from apart action " ,apartments);
       dispatch({ type: actionTypes.GET_APARTMENTS, payload: apartments });
 
     } catch (error) {
@@ -49,7 +49,6 @@ export const addApartment = (data) => async (dispatch) => {
 
 export const deleteApart = (apartmentId) => async (dispatch) => {
   try {
-    console.log("apartmentId from action ", apartmentId);
     await ApiService.deleteApartment(apartmentId);
     dispatch({ type: actionTypes.DELETE_APARTMENT, payload: apartmentId });
     toast({
@@ -69,20 +68,29 @@ export const deleteApart = (apartmentId) => async (dispatch) => {
 
 
 
-// export const updatePost = ({_id:postId , ...post} ) => async (dispatch) => {
-//   try {
-//    const updatedPost = await ApiService.updatePost(postId, post);
-//     dispatch({ type: actionTypes.UPDATE_POST, payload: updatedPost });
-//     // enqueueSnackbar("Post updated successfully.", { variant: 'success' })
+export const updateApartment = (apartmentId , data) => async (dispatch) => {
+  try {
+    console.log(apartmentId , data);
+   const updatedApartment = await ApiService.updateApartment(apartmentId,data);
+    dispatch({ type: actionTypes.UPDATE_APARTMENT, payload: updatedApartment });
+    toast({
+      title: 'Success',
+      description: 'The apartment updated successfully.',
+      status: 'success',
+    })
 
-//   } catch (error) {
-//     enqueueSnackbar("Error updating post.", { variant: 'error' })
+  } catch (error) {
+    console.error('Error fetching aparts:', error);
+    toast({
+      title: 'Error',
+      description: 'You can not update this apartment. Please try again.',
+      status: 'error',
+    })
 
-//   }
-// };
+  }
+};
 
 // export const selectPost =  (post) => {
-// //   enqueueSnackbar("Post is selected", { variant: 'success' })
 
 //   return {
     
@@ -95,8 +103,10 @@ export const deleteApart = (apartmentId) => async (dispatch) => {
 
 export const payApartment = (apartmentID) => async (dispatch) => {
   try {
+    console.log("apartmentID");
    const apartment = await ApiService.payApartment(apartmentID );
-    dispatch({ type: actionTypes.PAY_APARTMENT, payload: {apartmentID} });
+   console.log("apartment");
+    dispatch({ type: actionTypes.PAY_APARTMENT, payload: { apartmentID} });
     toast({
       title: 'Success',
       description: 'The apartment paid successfully.',
