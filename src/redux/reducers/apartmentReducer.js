@@ -13,13 +13,14 @@ const apartmentReducer = (state = initialState, action) => {
     case actionTypes.ADD_APARTMENT:
       return { ...state, apartments: [...state.apartments, action.payload] };
 
-    case actionTypes.UPDATE_POST:
+    case actionTypes.UPDATE_APARTMENT:
+      console.log(action.payload);
       return {
         ...state,
-        posts: state.posts.map((post) =>
-          post._id === action.payload._id
-            ? { ...post, ...action.payload }
-            : post
+        apartments: state.apartments.map((apartment) =>
+          apartment._id === action.payload.apartmentID
+            ? {...apartment, ...action.payload}
+            : apartment
         ),
       };
 
@@ -41,7 +42,6 @@ const apartmentReducer = (state = initialState, action) => {
     //     selectedPost: null,
     //   };
     case actionTypes.DELETE_APARTMENT:
-      console.log("action.payload", action.payload);
       return {
         ...state,
         apartments: state.apartments.filter((apartment) => apartment._id !== action.payload),
