@@ -5,6 +5,7 @@ import ListApart from "../components/ListApart/ListApart";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "./privateRoute";
+import AuthRoute from "./authRoute";
 
 /**
  * @type {import("react-router-dom").RouteObject[]}
@@ -30,8 +31,15 @@ const routes = [
     ],
   },
   {
-    path: "/",
-    Component: Login,
+    Component: AuthRoute,
+    children:[
+      {
+        path: "/",
+        Component: Login,
+      },
+    ]
+    
+   
   },
   {
     path: "/Register",
