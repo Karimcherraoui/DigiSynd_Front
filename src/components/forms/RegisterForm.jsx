@@ -41,11 +41,8 @@ export default function RegisterForm() {
 
   const handleSubmit = () => {
 
-    console.log(formData);
     dispatch(registerAdmin(formData))
     navigate('/dashboard')
-
-    
   }
 
   return (
