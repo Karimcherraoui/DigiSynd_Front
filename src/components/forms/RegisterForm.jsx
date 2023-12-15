@@ -1,10 +1,8 @@
 import {
-  Box,
   Button,
   Flex,
   FormControl,
   FormLabel,
-  Grid,
   Heading,
   Input,
   InputGroup,
@@ -15,17 +13,40 @@ import Footer from "../layout/Footer";
 import { useState } from "react";
 import { BiShowAlt } from "react-icons/bi";
 import { GrFormViewHide } from "react-icons/gr";
+import { registerAdmin } from "../../redux/actions/adminActions";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
+const emptyFormData = {
+  fullName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+  };
 
 export default function RegisterForm() {
-  const [showPass, setShowPass] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
+  const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+  const navigate = useNavigate()
 
-  const handleClickPass = () => setShowPass(!showPass);
-  const handleClickConfirm = () => setShowConfirm(!showConfirm);
+  const [formData , setFormData] = useState(emptyFormData)
 
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  const handleSubmit = () => {
+
+    console.log(formData);
+    dispatch(registerAdmin(formData))
+    navigate('/dashboard')
+
+    
+  }
 
   return (
     <>
@@ -50,7 +71,10 @@ export default function RegisterForm() {
             Use these awesome forms to create new account for syndic.
           </Text>
         </Heading>
+
+        <form onSubmit={handleSubmit}>
         <Flex
+        
           p="50px"
           h="500px"
           w="500px"
@@ -60,77 +84,119 @@ export default function RegisterForm() {
           backdropFilter="blur(21px)"
           justifyContent="center"
         >
-
-          <from>
-
-          <Flex
-            flexDirection="column"
-            gap="20px"
-            w="100%"
-            justifyContent="center"
-          >
-             <FormControl isRequired>
-              <Flex flexDirection="column">
-                <FormLabel color="white">Full Name</FormLabel>
-                <Input h="50px" placeholder="Full Name" borderRadius="30px" color={"white"}  fontWeight={"bold"} />
-              </Flex>
-            </FormControl>
-
-             <FormControl isRequired>
-              <Flex flexDirection="column">
-                <FormLabel color="white">Email</FormLabel>
-                <Input h="50px" placeholder="Email" borderRadius="30px"  color={"white"}  fontWeight={"bold"}/>
-              </Flex>
-            </FormControl>
-
-             <FormControl isRequired >
-              <Flex flexDirection="column">
-                <FormLabel color="white">Password</FormLabel>
-                <InputGroup size="md">
+            <Flex
+              flexDirection="column"
+              gap="20px"
+              w="100%"
+              justifyContent="center"
+              >
+              <FormControl isRequired>
+                <Flex flexDirection="column">
+                  <FormLabel color="white">Full Name</FormLabel>
                   <Input
-                    pr="4.5rem"
+                  name="fullName"
+                    h="50px"
+                    placeholder="Full Name"
                     borderRadius="30px"
-                    type={showPass ? "text" : "password"}
-                    placeholder="Enter password"
-                    color={"white"}  fontWeight={"bold"}
+                    color={"white"}
+                    fontWeight={"bold"}
+                    onChange={handleChange}
                   />
-                  <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" background={"gray.200"} onClick={handleClickPass}>
-                    {showPass ? <GrFormViewHide /> : <BiShowAlt size={"20px"} />}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>{" "}
-              </Flex>
-            </FormControl>
-             <FormControl isRequired>
-              <Flex flexDirection="column">
-                <FormLabel color="white">Confirm Password</FormLabel>
-                <InputGroup size="md">
-                  <Input
-                    pr="4.5rem"
-                    borderRadius="30px"
-                    type={showConfirm ? "text" : "password"}
-                    placeholder="Confirm password"
-                    color={"white"}  fontWeight={"bold"}
-                  />
-                  <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" background={"gray.200"} onClick={handleClickConfirm}>
-                    {showConfirm ? <GrFormViewHide /> : <BiShowAlt size={"20px"} />}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>{" "}
-              </Flex>
-            </FormControl>
+                </Flex>
+              </FormControl>
 
-            <Flex justifyContent="center" alignItems="center" mt="40px">
-              <Button background="#0075FF" w="80%" color="white" type="submit">
-                NEW SYNDIC
-              </Button>
+              <FormControl isRequired>
+                <Flex flexDirection="column">
+                  <FormLabel color="white">Email</FormLabel>
+                  <Input
+                  name="email"
+                    h="50px"
+                    placeholder="Email"
+                    borderRadius="30px"
+                    color={"white"}
+                    fontWeight={"bold"}
+                    onChange={handleChange}
+                  />
+                </Flex>
+              </FormControl>
+
+              <FormControl isRequired>
+                <Flex flexDirection="column">
+                  <FormLabel color="white">Password</FormLabel>
+                  <InputGroup size="md">
+                    <Input
+                    name="password"
+                      pr="4.5rem"
+                      borderRadius="30px"
+                      type={show ? "text" : "password"}
+                      placeholder="Enter password"
+                      color={"white"}
+                      fontWeight={"bold"}
+                      onChange={handleChange}
+                    />
+                    <InputRightElement width="4.5rem">
+                      <Button
+                        h="1.75rem"
+                        size="sm"
+                        background={"gray.200"}
+                        onClick={handleClick}
+                      >
+                        {show ? (
+                          <GrFormViewHide />
+                        ) : (
+                          <BiShowAlt size={"20px"} />
+                        )}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>{" "}
+                </Flex>
+              </FormControl>
+              <FormControl isRequired>
+                <Flex flexDirection="column">
+                  <FormLabel color="white">Confirm Password</FormLabel>
+                  <InputGroup size="md">
+                    <Input
+                    name="confirmPassword"
+                      pr="4.5rem"
+                      borderRadius="30px"
+                      type={show ? "text" : "password"}
+                      placeholder="Confirm password"
+                      color={"white"}
+                      fontWeight={"bold"}
+                      onChange={handleChange}
+
+                    />
+                    <InputRightElement width="4.5rem">
+                      <Button
+                        h="1.75rem"
+                        size="sm"
+                        background={"gray.200"}
+                        onClick={handleClick}
+                      >
+                        {show ? (
+                          <GrFormViewHide />
+                        ) : (
+                          <BiShowAlt size={"20px"} />
+                        )}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>{" "}
+                </Flex>
+              </FormControl>
+
+              <Flex justifyContent="center" alignItems="center" mt="40px">
+                <Button
+                  background="#0075FF"
+                  w="60%"
+                  color="white"
+                  type="submit"
+                >
+                  NEW SYNDIC
+                </Button>
+              </Flex>
             </Flex>
-          </Flex>
-          </from>
-
         </Flex>
+          </form>
         <Footer />
       </Flex>
     </>
