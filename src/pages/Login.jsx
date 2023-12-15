@@ -7,6 +7,7 @@ import { Image } from "@chakra-ui/image";
 import LoginForm from "../components/forms/LoginForm";
 
 export default function Login() {
+
   return (
     <Flex
       background="linear-gradient(159deg, #0F123B 14.25%, #090D2E 56.45%, #020515 86.14%)"
