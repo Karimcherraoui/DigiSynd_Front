@@ -1,16 +1,20 @@
-import React from "react";
-import store from "./redux/store/store";
+import React, { useEffect, useLayoutEffect } from "react";
 import { RouterProvider} from "react-router-dom";
 
 import router from "./router";
-import { Provider } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function App() {
+  const dispatch = useDispatch();
+    useEffect(() => {
+      const syndic = localStorage.getItem("syndic")
+      if (syndic) {
+        const { admin } = JSON.parse(syndic);
+        dispatch({ type: "LOGIN", payload: admin });
+      }
+    }, [dispatch]);
   return (
-    <Provider store=
-    {store}>
   <RouterProvider router={router}>
     </RouterProvider>
-    </Provider>
   );
 }
