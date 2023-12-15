@@ -8,13 +8,9 @@ export default function DeleteConfirm({ id, isOpen, onOpen, onClose }) {
 
 
         const deleteApartment = () => {
-          console.log("from delete component",id);
           dispatch(deleteApart(id))
           onClose()
         }
-
-    // dispatch({ type: 'DELETE_APARTMENT', payload: id })
-
   return (
     <>
       
