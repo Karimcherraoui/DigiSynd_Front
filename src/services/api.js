@@ -4,8 +4,8 @@ import axios from './config';
 const ApiService = {
   
   createApartment: async (apart) => {
-    const userData = JSON.parse(localStorage.getItem("syndic"));
-      const token = userData.token;
+    const syndic = JSON.parse(localStorage.getItem("syndic"));
+      const token = syndic.token;
     try {
       const res = await axios.post('/apartment/', apart ,{
         headers: {
@@ -19,8 +19,8 @@ const ApiService = {
     }
   },
   getApartments: async () => {
-    const userData = JSON.parse(localStorage.getItem("syndic"));
-    const token = userData.token;
+    const syndic = JSON.parse(localStorage.getItem("syndic"));
+    const token = syndic.token;
     try {
       const res = await axios.get('/apartment',{
         headers: {
@@ -36,8 +36,8 @@ const ApiService = {
 
   registerAdmin: async (data) => {
     try {
-      const userData = JSON.parse(localStorage.getItem("syndic"));
-      const token = userData.token;
+      const syndic = JSON.parse(localStorage.getItem("syndic"));
+      const token = syndic.token;
     const res = await axios.post('/admin/register', data ,{
   headers: {
     Authorization: `Bearer ${token}`
@@ -63,27 +63,33 @@ const ApiService = {
 
 
   
-//   updatePost: async (postId,data) => {
-//     try {
-//       const userData = JSON.parse(localStorage.getItem("user"));
-//       const token = userData.token;
-//       const res = await axios.patch(`/post/${postId}` , data ,{
-//         headers: {
-//           "Authorization": `Bearer ${token}`
-//         },
-//       });
-//       return res.data;
-//     } catch (error) {
-//       console.error(`Error updating post with id ${postId}:`, error);
-//       throw error;
-//     }
+  updateApartment: async (apartmentId,data) => {
+    try {
+
+      const syndic = JSON.parse(localStorage.getItem("syndic"));
+      const token = syndic.token;
+      const res = await axios.patch(`/apartment/${apartmentId}` , data ,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      });
+      return res.data;
+    } catch (error) {
+      console.error(`Error updating post with id ${apartmentId}:`, error);
+      throw error;
+    }
     
-//   },
+  },
   
   deleteApartment: async (apartmentId) => {
     try {
-    
-      const res = await axios.delete(`/apartment/${apartmentId}` );
+      const syndic = JSON.parse(localStorage.getItem("syndic"));
+      const token = syndic.token;
+      const res = await axios.delete(`/apartment/${apartmentId}` ,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }); 
       return res.data;
     } catch (error) {
       console.error(`Error deleting apartment with id ${apartmentId}:`, error);
@@ -97,9 +103,16 @@ const ApiService = {
 
   payApartment: async (apartmentId) => {
     try {
- 
-        const {data:apartment} = await axios.patch(`/apartment/pay/${apartmentId}`
-        )
+      
+      const syndic = JSON.parse(localStorage.getItem("syndic"));
+      const token = syndic.token;
+      console.log(token);
+        const {data:apartment} = await axios.patch(`/apartment/pay/${apartmentId}` ,[],{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }); 
+        
       return apartment;
     } catch (error) {
       console.error(`Error Pay Apartment with id ${apartmentId}:`, error);
