@@ -7,7 +7,6 @@ const initialState = {
 const adminReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN:
-      console.log("from admin reducer", action.payload);
       return {
         ...state,
         admin: action.payload,
