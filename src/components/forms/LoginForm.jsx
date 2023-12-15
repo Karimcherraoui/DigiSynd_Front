@@ -1,16 +1,55 @@
 import {
-  Box,
   Button,
   Flex,
+  FormControl,
   FormLabel,
-  Grid,
   Heading,
   Input,
+  InputGroup,
+  InputRightElement,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import Footer from "../layout/Footer";
+import { useEffect, useState } from "react";
+import { GrFormViewHide } from "react-icons/gr";
+import { BiShowAlt } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAdmin } from "../../redux/actions/adminActions";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const toast = useToast();
+ 
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+  const [formData , setFormData] = useState({})
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      dispatch(loginAdmin(formData));
+      navigate('/dashboard')
+
+    } catch (error) {
+      toast({
+        title: "Login Failed",
+        description: "Incorrect email or password. Please try again.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  }
   return (
     <>
       <Flex
@@ -32,6 +71,7 @@ export default function LoginForm() {
           <Text mb="10px">Nice to see you!</Text>
           <Text fontSize="10px">Enter your email and password to sign in</Text>
         </Heading>
+        <form onSubmit={handleSubmit}>
         <Flex
           p="50px"
           h="400px"
@@ -42,24 +82,54 @@ export default function LoginForm() {
           backdropFilter="blur(21px)"
           justifyContent="center"
         >
+
           <Flex flexDirection="column" gap="20px" w="100%" justifyContent="center" >
+            
             <Flex flexDirection="column">
               <FormLabel color="white">Email</FormLabel>
-              <Input h="50px" placeholder="Email" borderRadius="30px" />
+              <Input color={"white"} h="50px" placeholder="Email" borderRadius="30px" name="email" onChange={handleChange}/>
             </Flex>
-            <Flex flexDirection="column">
-              <FormLabel color="white">Password</FormLabel>
-              <Input h="50px" placeholder="Password" borderRadius="30px" />
-            </Flex>
+            <FormControl isRequired>
+                <Flex flexDirection="column">
+                  <FormLabel color="white">Password</FormLabel>
+                  <InputGroup size="md">
+                    <Input
+                    name="password"
+                      pr="4.5rem"
+                      borderRadius="30px"
+                      type={show ? "text" : "password"}
+                      placeholder="Enter password"
+                      color={"white"}
+                      onChange={handleChange}
+                    />
+                    <InputRightElement width="4.5rem">
+                      <Button
+                        h="1.75rem"
+                        size="sm"
+                        background={"gray.200"}
+                        onClick={handleClick}
+                      >
+                        {show ? (
+                          <GrFormViewHide />
+                        ) : (
+                          <BiShowAlt size={"20px"} />
+                        )}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>{" "}
+                </Flex>
+              </FormControl>
 
             
           <Flex justifyContent="center" alignItems="center" mt="40px" >
-            <Button background="#0075FF" w="80%" color="white">
+            <Button background="#0075FF" w="80%" color="white" type="submit">
               Login
             </Button>
           </Flex>
           </Flex>
+
         </Flex>
+          </form>
         <Footer />
       </Flex>
     </>
