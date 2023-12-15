@@ -43,7 +43,7 @@ export default function Header() {
         <Flex  gap="5px" alignItems="center">
 
           <Icon color="gray.300" as = {CgProfile}     />
-          <Text as={Link} to={"/login"} color="gray.300">SIGN IN </Text>
+          <Text as={Link} to={"/"} color="gray.300">SIGN IN </Text>
 
         </Flex>
       </Flex>
