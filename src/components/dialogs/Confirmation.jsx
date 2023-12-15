@@ -5,9 +5,9 @@ import { payApartment } from '../../redux/actions/apartmentActions'
 
 export default function Confirmation({ id, isOpen, onOpen, onClose }) {
         const dispatch = useDispatch()
-
-
-        const payApartments = () => {
+        console.log(id)
+        const Pay = () => {
+          console.log("Pay");
             dispatch(payApartment(id))
             onClose()
         }
@@ -28,7 +28,7 @@ export default function Confirmation({ id, isOpen, onOpen, onClose }) {
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button background='Green' color='white' variant='ghost' onClick={payApartments}>Confirm</Button>
+            <Button background='Green' color='white' variant='ghost' onClick={Pay}>Confirm</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
