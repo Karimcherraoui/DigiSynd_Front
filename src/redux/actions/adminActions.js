@@ -6,9 +6,7 @@ import toast from '../../components/toast/toast';
 
 export const registerAdmin = (data) => async (dispatch) => {
     try {
-        console.log("from admin action DATA " ,data);
       const admin = await ApiService.registerAdmin(data);
-      console.log("from admin action " ,admin);
       dispatch({ type: actionTypes.REGISTER, payload: admin });
         toast({
             title: 'Success',
@@ -29,18 +27,20 @@ export const registerAdmin = (data) => async (dispatch) => {
   };
 
  
-export const loginAdmin = (data) => async (dispatch) => {
+export const loginAdmin = (data,navigate) => async (dispatch) => {
 
     try {
-      console.log("from admin action DATA ", data);
       const admin = await ApiService.loginAdmin(data);
       dispatch({ type: actionTypes.LOGIN, payload: admin });
+
       toast({
         title: 'Success',
         description: 'Login successfully.',
         status: 'success',
    
       });
+      navigate('/dashboard')
+
     } catch (error) {
       toast({
         title: 'Error',
