@@ -32,21 +32,13 @@ export default function Header() {
         letterSpacing="3.6px"
         background="linear-gradient(98deg, #FFF 70.67%, rgba(117, 122, 140, 0.00) 108.55%)"
         backgroundClip="text"
-        
+        as={Link} 
+        to={"/dashboard"}
       >
         DigiSynd
       </Text>
 
-      <Flex  gap="50px">
-        <Text as={Link} to={"/dashboard"} color="gray.300"> Dashboard</Text>
-
-        <Flex  gap="5px" alignItems="center">
-
-          <Icon color="gray.300" as = {CgProfile}     />
-          <Text as={Link} to={"/"} color="gray.300">SIGN IN </Text>
-
-        </Flex>
-      </Flex>
+      
     </Flex>
   );
 }
