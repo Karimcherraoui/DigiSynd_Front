@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import img from "../../assets/images/apart.webp";
 import { LuPenSquare } from "react-icons/lu";
@@ -6,20 +6,26 @@ import { MdDeleteOutline } from "react-icons/md";
 import { GiReceiveMoney } from "react-icons/gi";
 import { FaRegFilePdf } from "react-icons/fa6";
 import DeleteConfirm from "../dialogs/DeleteConfirm";
-
 import Confirmation from "../dialogs/confirmation";
+import ModalUpdate from "../forms/modalUpdate";
+
 
 export default function ApartmentCard({ apartment }) {
   const deleteDialog = useDisclosure();
   const paymentDialog = useDisclosure();
+  const updateDialog = useDisclosure();
+
+
   const handleClickPay = () => {
     paymentDialog.onOpen();
   };
   const handleClickDelete = () => {
     deleteDialog.onOpen();
   };
-
-
+  const handleClickUpdate = () => {
+    updateDialog.onOpen();
+  }
+ 
   return (
     <Flex
       flexDirection="column"
@@ -43,8 +49,15 @@ export default function ApartmentCard({ apartment }) {
         onClose={paymentDialog.onClose}
       />
 
+      <ModalUpdate
+        id={apartment._id}
+        apartment={apartment}
+        isOpen={updateDialog.isOpen}
+        onClose={updateDialog.onClose}
+      />
+
       <Flex pos="absolute" gap="10px" right="10px" top="10px">
-        <Button size="sm" colorScheme="blue" variant="solid">
+        <Button size="sm" colorScheme="blue" variant="solid"onClick={handleClickUpdate} >
           <LuPenSquare />
         </Button>
 
