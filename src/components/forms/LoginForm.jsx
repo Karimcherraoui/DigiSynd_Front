@@ -14,7 +14,7 @@ import Footer from "../layout/Footer";
 import { useEffect, useState } from "react";
 import { GrFormViewHide } from "react-icons/gr";
 import { BiShowAlt } from "react-icons/bi";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { loginAdmin } from "../../redux/actions/adminActions";
 import { useNavigate } from "react-router-dom";
 
@@ -37,9 +37,7 @@ export default function LoginForm() {
     e.preventDefault();
 
     try {
-      dispatch(loginAdmin(formData));
-      navigate('/dashboard')
-
+      dispatch(loginAdmin(formData,navigate));
     } catch (error) {
       toast({
         title: "Login Failed",
