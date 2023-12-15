@@ -18,11 +18,11 @@ const icons = {
     name:"New Apartment"
   },
 
-  NewSyndic: {
-    link:'/Register',
-    icon:FaUserPlus,
-    name:"New Syndic"
-  }
+  // NewSyndic: {
+  //   link:'/Register',
+  //   icon:FaUserPlus,
+  //   name:"New Syndic"
+  // }
 };
 
 export default function Items({ navSize }) {
