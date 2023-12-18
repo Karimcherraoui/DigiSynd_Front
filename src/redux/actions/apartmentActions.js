@@ -1,7 +1,6 @@
 import * as actionTypes from './actionsType'
 import ApiService from '../../services/api';
 import toast from '../../components/toast/toast';
-import { redirect } from 'react-router-dom';
 
 export const getApartments = () => async (dispatch) => {
     try {
@@ -9,19 +8,20 @@ export const getApartments = () => async (dispatch) => {
       dispatch({ type: actionTypes.GET_APARTMENTS, payload: apartments });
 
     } catch (error) {
-    //   enqueueSnackbar("Error liking post ", { variant: 'error' })
       console.error('Error fetching apartments:', error);
     }
   };
+  export const getFactures = (id) => async (dispatch) => {
+    console.log(id);
+    try {
+      const factures = await ApiService.getFactures(id);
+      console.log("factures",factures);
+      dispatch({ type: actionTypes.GET_FACTURES, payload: factures });
 
-
-
-//   export const clearSelectedPost = () => {
-//     return {
-//       type: actionTypes.CLEAR_SELECTEDPOST,
-//     };
-//   }
-  
+    } catch (error) {
+      console.error('Error fetching apartments:', error);
+    }
+  };
 
 export const addApartment = (data) => async (dispatch) => {
 
@@ -72,6 +72,7 @@ export const updateApartment = (apartmentId , data) => async (dispatch) => {
   try {
     console.log(apartmentId , data);
    const updatedApartment = await ApiService.updateApartment(apartmentId,data);
+   console.log(updatedApartment);
     dispatch({ type: actionTypes.UPDATE_APARTMENT, payload: updatedApartment });
     toast({
       title: 'Success',
@@ -90,22 +91,23 @@ export const updateApartment = (apartmentId , data) => async (dispatch) => {
   }
 };
 
-// export const selectPost =  (post) => {
+export const selectApartment =  (apartment) => {
+  console.log(apartment);
 
-//   return {
+  return {
     
-//     type: actionTypes.SELECT_POST,
-//     payload: post
-//   }
-// };
+    type: actionTypes.SELECT_APARTMENT,
+    payload: apartment
+  }
+};
 
 
 
 export const payApartment = (apartmentID) => async (dispatch) => {
   try {
-    console.log("apartmentID");
+    console.log(apartmentID);
    const apartment = await ApiService.payApartment(apartmentID );
-   console.log("apartment");
+   console.log(apartment);
     dispatch({ type: actionTypes.PAY_APARTMENT, payload: { apartmentID} });
     toast({
       title: 'Success',
