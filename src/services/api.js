@@ -34,6 +34,21 @@ const ApiService = {
     }
   },
 
+  getFactures: async (apartmentId) => {
+    const syndic = JSON.parse(localStorage.getItem("syndic"));
+    const token = syndic.token;
+    try {
+      const res = await axios.get(`/apartment/facture/${apartmentId}` ,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      });
+      return res.data;
+    } catch (error) {
+      console.error('Error getting apartments:', error);
+      throw error;
+    }
+  },
   registerAdmin: async (data) => {
     try {
       const syndic = JSON.parse(localStorage.getItem("syndic"));
@@ -106,7 +121,6 @@ const ApiService = {
       
       const syndic = JSON.parse(localStorage.getItem("syndic"));
       const token = syndic.token;
-      console.log(token);
         const {data:apartment} = await axios.patch(`/apartment/pay/${apartmentId}` ,[],{
           headers: {
             Authorization: `Bearer ${token}`
