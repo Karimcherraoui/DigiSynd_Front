@@ -1,11 +1,15 @@
 import { Button, Flex, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { updateApartment } from "../../redux/actions/apartmentActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { redirect } from "react-router-dom";
 
 
 export default function ModalUpdate({ id, apartment, isOpen, onOpen, onClose }) {
+        const apart = useSelector((state) => state.aparts.selectedApartment);
+    console.log(apart);
+
+    console.log(apartment)
     const dispatch = useDispatch()
 
   const [formData, setFormData] = useState(apartment);
