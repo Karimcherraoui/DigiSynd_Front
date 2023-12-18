@@ -12,7 +12,9 @@ import { getApartments } from "../../redux/actions/apartmentActions";
 export default function ListApart() {
 
   const aparts  = useSelector((state) => state.aparts.apartments);
-  
+  const facture = useSelector((state) => state.aparts.facture);
+
+console.log("facture",facture)  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,9 +36,12 @@ export default function ListApart() {
         }}
         style={{ width: "1200px", padding: "50px" }}
         slidesPerView={3}
-        navigation
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
+        // navigation 
+        navigation={{
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        }}
+       
         onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={() => console.log("slide change")}
       >
@@ -45,6 +50,8 @@ export default function ListApart() {
             <ApartmentCard apartment={apartment}/>
           </SwiperSlide>
         ))}
+         <div className="swiper-button-next" style={{ color: "white"}} />
+      <div className="swiper-button-prev" style={{ color: "white" }} />
       </Swiper>
     </Flex>
   );
