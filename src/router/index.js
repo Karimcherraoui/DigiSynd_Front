@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "./privateRoute";
 import AuthRoute from "./authRoute";
+import PDFfile from "../components/pdf/PDFfile";
 
 /**
  * @type {import("react-router-dom").RouteObject[]}
@@ -45,6 +46,7 @@ const routes = [
     path: "/Register",
     Component: Register,
   },
+
 ];
 
 const router = createBrowserRouter(routes);
