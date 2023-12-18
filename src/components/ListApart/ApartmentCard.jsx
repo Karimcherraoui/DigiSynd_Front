@@ -8,13 +8,22 @@ import { FaRegFilePdf } from "react-icons/fa6";
 import DeleteConfirm from "../dialogs/DeleteConfirm";
 import Confirmation from "../dialogs/confirmation";
 import ModalUpdate from "../forms/modalUpdate";
-
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PDFfile from "../pdf/PDFfile";
+import PdfFactures from "../dialogs/PdfFactures";
+import { getFactures } from "../../redux/actions/apartmentActions";
+import { useDispatch } from "react-redux";
 
 export default function ApartmentCard({ apartment }) {
   const deleteDialog = useDisclosure();
   const paymentDialog = useDisclosure();
   const updateDialog = useDisclosure();
-
+  const facturesDialog =useDisclosure()
+  const dispatch = useDispatch()
+const handleClickPDF = () => {
+  dispatch(getFactures(apartment._id))
+  facturesDialog.onOpen();
+}
 
   const handleClickPay = () => {
     paymentDialog.onOpen();
@@ -25,6 +34,7 @@ export default function ApartmentCard({ apartment }) {
   const handleClickUpdate = () => {
     updateDialog.onOpen();
   }
+
  
   return (
     <Flex
@@ -55,7 +65,7 @@ export default function ApartmentCard({ apartment }) {
         isOpen={updateDialog.isOpen}
         onClose={updateDialog.onClose}
       />
-
+      <PdfFactures dialog={facturesDialog} id={apartment._id} apartment={apartment}/>
       <Flex pos="absolute" gap="10px" right="10px" top="10px">
         <Button size="sm" colorScheme="blue" variant="solid"onClick={handleClickUpdate} >
           <LuPenSquare />
@@ -130,10 +140,13 @@ export default function ApartmentCard({ apartment }) {
           colorScheme="gray"
           border="1px solid black"
           variant="solid"
+          onClick={handleClickPDF}
         >
-          <FaRegFilePdf />
+          
+          <FaRegFilePdf  />
         </Button>
       </Flex>
+    
     </Flex>
   );
 }
