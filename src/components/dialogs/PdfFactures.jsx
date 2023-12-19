@@ -6,18 +6,14 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  Text,
 } from "@chakra-ui/react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PDFfile from "../pdf/PDFfile";
-/**
- *
- * @param {{dialog:import('@chakra-ui/react').UseDisclosureReturn}} dialog
- * @returns
- */
-export default function PdfFactures({ dialog, id, apartment }) {
-  console.log(apartment);
+
+export default function PdfFactures({ dialog, apartment }) {
 
   const datesFacture = useSelector((state) => state.aparts.factures);
 
@@ -33,20 +29,28 @@ export default function PdfFactures({ dialog, id, apartment }) {
         <ModalContent>
           <ModalHeader>Download Facture</ModalHeader>
           <ModalBody>
-            {datesFacture.map((dateFacture, index) => (
-              <Flex w={"full"} key={index}>
-                <PDFDownloadLink
-                  document={
-                    <PDFfile apartment={apartment} date={dateFacture} />
-                  }
-                  fileName="Facture Payment"
-                >
-                  <Button my={"5px"} background={"green.200"}>
-                    {formatDate(dateFacture)}
-                  </Button>
-                </PDFDownloadLink>
+          {datesFacture.length === 0 ? (
+              <Flex w={"full"} justifyContent={"center"}>
+                <Text my={"5px"} >
+                  No Facture
+                </Text>
               </Flex>
-            ))}
+            ) : (
+              datesFacture.map((dateFacture, index) => (
+                <Flex w={"full"} justifyContent={"center"} key={index}>
+                  <PDFDownloadLink
+                    document={
+                      <PDFfile apartment={apartment} date={dateFacture} />
+                    }
+                    fileName="Facture Payment"
+                  >
+                    <Button my={"5px"} background={"green.200"} >
+                      {formatDate(dateFacture)}
+                    </Button>
+                  </PDFDownloadLink>
+                </Flex>
+              ))
+            )}
           </ModalBody>
         </ModalContent>
       </Modal>
