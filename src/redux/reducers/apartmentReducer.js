@@ -52,7 +52,6 @@ const apartmentReducer = (state = initialState, action) => {
         ),
       };
     case actionTypes.PAY_APARTMENT:
-      console.log(action.payload.apartmentID)
       return {
         ...state,
         apartments: state.apartments.map((apartment) =>
@@ -60,8 +59,6 @@ const apartmentReducer = (state = initialState, action) => {
             ? { ...apartment, isPaid: true }
             : apartment
         ),
-
-        
         factures: state.factures.map((facture) =>
           facture.apartment === action.payload.apartmentID
             ? { ...facture, paymentFacture: Date.now() }
@@ -71,7 +68,7 @@ const apartmentReducer = (state = initialState, action) => {
       };
 
       case actionTypes.GET_FACTURES:
-        
+
       return { ...state, factures: action.payload };
 
     default:
