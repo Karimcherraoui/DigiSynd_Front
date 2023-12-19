@@ -72,7 +72,6 @@ export const updateApartment = (apartmentId , data) => async (dispatch) => {
   try {
     console.log(apartmentId , data);
    const updatedApartment = await ApiService.updateApartment(apartmentId,data);
-   console.log(updatedApartment);
     dispatch({ type: actionTypes.UPDATE_APARTMENT, payload: updatedApartment });
     toast({
       title: 'Success',
@@ -117,7 +116,6 @@ export const payApartment = (apartmentID) => async (dispatch) => {
 
     
   } catch (error) {
-//   enqueueSnackbar("Error liking post ", { variant: 'error' })
 console.error('Error fetching aparts:', error);
 toast({
   title: 'Error',
