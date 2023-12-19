@@ -36,7 +36,6 @@ console.log("facture",facture)
         }}
         style={{ width: "1200px", padding: "50px" }}
         slidesPerView={3}
-        // navigation 
         navigation={{
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
