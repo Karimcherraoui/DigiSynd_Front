@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
 });
 
 export default function PDFfile({apartment , date}) {
-    // const apartmentFacture = useSelector((state) => state.aparts.selectedApartment);
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         return date.toLocaleString("fr-FR", {
