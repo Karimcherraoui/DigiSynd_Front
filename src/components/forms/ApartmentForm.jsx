@@ -31,6 +31,8 @@ export default function ApartmentForm() {
 
   const [formData , setFormData] = useState(emptyFormData)
 
+  const user = JSON.parse(localStorage.getItem("syndic"));
+  const role = user.admin.role
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -106,7 +108,7 @@ export default function ApartmentForm() {
               </FormControl>
           </Grid>
           <Flex justifyContent="center" alignItems="center" mt="40px">
-            <Button colorScheme="blue" w="80%" type="submit">
+            <Button isDisabled={role === "superAdmin"} colorScheme="blue" w="80%" type="submit">
               New Apartment
             </Button>
           </Flex>
