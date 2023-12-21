@@ -14,16 +14,11 @@ export default function ListApart() {
   const aparts  = useSelector((state) => state.aparts.apartments);
   const facture = useSelector((state) => state.aparts.facture);
 
-console.log("facture",facture)  
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getApartments());
   }, [dispatch]);
-
-
-  
-
 
   return (
     <Flex>
@@ -41,8 +36,8 @@ console.log("facture",facture)
           prevEl: ".swiper-button-prev",
         }}
        
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
       >
         {aparts.map((apartment, index) => (
           <SwiperSlide key={index}>
