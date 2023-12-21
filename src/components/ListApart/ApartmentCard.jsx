@@ -19,6 +19,9 @@ export default function ApartmentCard({ apartment }) {
   const facturesDialog =useDisclosure()
   const dispatch = useDispatch()
 
+  const user = JSON.parse(localStorage.getItem("syndic"));
+  const role = user.admin.role
+
 const handleClickPDF = () => {
   dispatch(getFactures(apartment._id))
   facturesDialog.onOpen();
@@ -66,14 +69,15 @@ const handleClickPDF = () => {
       />
       <PdfFactures dialog={facturesDialog} apartment={apartment}/>
       <Flex pos="absolute" gap="10px" right="10px" top="10px">
-        <Button size="sm" colorScheme="blue" variant="solid"onClick={handleClickUpdate} >
-          <LuPenSquare />
+        <Button size="sm" colorScheme="blue" variant="solid" isDisabled={role === "superAdmin"} onClick={handleClickUpdate}  >
+          <LuPenSquare /> 
         </Button>
 
         <Button
           size="sm"
           colorScheme="red"
           variant="solid"
+          isDisabled={role === "superAdmin"}
           onClick={handleClickDelete}
         >
           <MdDeleteOutline />{" "}
@@ -125,12 +129,13 @@ const handleClickPDF = () => {
 
       <Flex gap="10px" py="15px" justifyContent="center">
         <Button
+
           onClick={handleClickPay}
           leftIcon={<GiReceiveMoney />}
           w="70%"
           colorScheme={apartment.isPaid ? "gray" : "green"}
           variant="solid"
-          isDisabled={apartment.isPaid}
+          isDisabled={apartment.isPaid || role === "superAdmin"}
         >
           {apartment.isPaid ? "Paid" : "Pay"}
         </Button>
@@ -139,6 +144,7 @@ const handleClickPDF = () => {
           colorScheme="gray"
           border="1px solid black"
           variant="solid"
+          isDisabled={role === "superAdmin"}
           onClick={handleClickPDF}
         >
           
