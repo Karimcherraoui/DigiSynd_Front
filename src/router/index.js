@@ -6,13 +6,17 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "./privateRoute";
 import AuthRoute from "./authRoute";
-import superAdminRoute from "./superAdminRoute";
+import SuperAdminRoute from "./superAdminRoute";
+import NotFound from "../pages/NotFound";
 
 /**
  * @type {import("react-router-dom").RouteObject[]}
  */
 
+
+
 const routes = [
+ 
   {
     Component: PrivateRoute,
     children: [
@@ -33,21 +37,28 @@ const routes = [
   },
   {
     Component: AuthRoute,
-    children:[
+    children: [
       {
         path: "/",
         Component: Login,
       },
-    ]
-    
-   
-  },
-  
-  {
-    path: "/Register",
-    Component: Register,
+    ],
   },
 
+  {
+    path: "/Register",
+    Component: SuperAdminRoute,
+    children: [
+      {
+        path: "",
+        Component: Register,
+      },
+    ],
+  },
+  {
+    path : "*",
+    Component: NotFound
+  } 
 ];
 
 const router = createBrowserRouter(routes);
