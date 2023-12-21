@@ -1,11 +1,10 @@
 import {  Navigate, Outlet } from "react-router-dom";
 
-const superAdminRoute = () => {
+const SuperAdminRoute = () => {
     const syndic = localStorage.getItem("syndic")
     const superAdmin = syndic && JSON.parse(syndic).admin.role === "superAdmin" ? true : false
     return (
-       
-        superAdmin ?<Navigate to="/Register"></Navigate> : <Outlet /> 
+        !superAdmin ? <Navigate to="/dashboard"/> : <Outlet /> 
     );
     }
-    export default superAdminRoute;
+export default SuperAdminRoute;
