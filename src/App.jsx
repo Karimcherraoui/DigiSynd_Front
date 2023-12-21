@@ -2,7 +2,6 @@ import React, { useEffect, useLayoutEffect } from "react";
 import { RouterProvider} from "react-router-dom";
 
 import router from "./router";
-import { useDispatch } from "react-redux";
 
 export default function App() {
   return (
