@@ -7,9 +7,7 @@ import { redirect } from "react-router-dom";
 
 export default function ModalUpdate({ id, apartment, isOpen, onOpen, onClose }) {
         const apart = useSelector((state) => state.aparts.selectedApartment);
-    console.log(apart);
 
-    console.log(apartment)
     const dispatch = useDispatch()
 
   const [formData, setFormData] = useState(apartment);
