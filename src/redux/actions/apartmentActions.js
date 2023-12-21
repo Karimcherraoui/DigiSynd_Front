@@ -2,6 +2,10 @@ import * as actionTypes from './actionsType'
 import ApiService from '../../services/api';
 import toast from '../../components/toast/toast';
 
+const user = JSON.parse(localStorage.getItem('syndic'));
+
+
+
 export const getApartments = () => async (dispatch) => {
     try {
       const apartments = await ApiService.getApartments();
@@ -12,10 +16,9 @@ export const getApartments = () => async (dispatch) => {
     }
   };
   export const getFactures = (id) => async (dispatch) => {
-    console.log(id);
     try {
       const factures = await ApiService.getFactures(id);
-      console.log("factures",factures);
+
       dispatch({ type: actionTypes.GET_FACTURES, payload: factures });
 
     } catch (error) {
@@ -70,9 +73,8 @@ export const deleteApart = (apartmentId) => async (dispatch) => {
 
 export const updateApartment = (apartmentId , data) => async (dispatch) => {
   try {
-    console.log(apartmentId , data);
-   const updatedApartment = await ApiService.updateApartment(apartmentId,data);
-    dispatch({ type: actionTypes.UPDATE_APARTMENT, payload: updatedApartment });
+   await ApiService.updateApartment(apartmentId,data);
+    dispatch({ type: actionTypes.UPDATE_APARTMENT, payload: data });
     toast({
       title: 'Success',
       description: 'The apartment updated successfully.',
@@ -91,7 +93,7 @@ export const updateApartment = (apartmentId , data) => async (dispatch) => {
 };
 
 export const selectApartment =  (apartment) => {
-  console.log(apartment);
+
 
   return {
     
@@ -104,9 +106,9 @@ export const selectApartment =  (apartment) => {
 
 export const payApartment = (apartmentID) => async (dispatch) => {
   try {
-    console.log(apartmentID);
-   const apartment = await ApiService.payApartment(apartmentID );
-   console.log(apartment);
+
+ await ApiService.payApartment(apartmentID );
+
     dispatch({ type: actionTypes.PAY_APARTMENT, payload: { apartmentID} });
     toast({
       title: 'Success',
