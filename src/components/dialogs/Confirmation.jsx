@@ -5,9 +5,7 @@ import { payApartment } from '../../redux/actions/apartmentActions'
 
 export default function Confirmation({ id, isOpen, onOpen, onClose }) {
         const dispatch = useDispatch()
-        console.log(id)
         const Pay = () => {
-          console.log("Pay");
             dispatch(payApartment(id))
             onClose()
         }
